@@ -31,10 +31,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api', routes);
 
-app.get('/product/create', (req, res) => {
-    res.render('index.html');
-});
-
 app.listen(app.get('port'), err => {
     if (err) {
         console.log('Error');

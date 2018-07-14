@@ -4,8 +4,14 @@ const { Product, User } = require('../models/product');
 class ProductController {
 
     static async getAll(req, res) {
-        const products = await User.find();
+        const products = await Product.find();
         res.json(products);
+    }
+
+    static async get(req, res) {
+        const id = req.params.id;
+        const product = await Product.findById(id).populate('user');
+        res.json(product);
     }
 
     static add(req, res) {
@@ -42,6 +48,12 @@ class ProductController {
         });
 
         res.send('ok 200');
+    }
+
+    static async delete(req, res) {
+        const id = req.params.id;
+        await Product.findByIdAndRemove(id);
+        res.send('Product removed.');
     }
 }
 
